@@ -1,0 +1,4 @@
+#!/bin/bash
+shopt -s globstar &&
+javac -d out/ -sourcepath src/ src/test/**/*.java &&
+java -cp out/ test.com.lindx.TestMain < expressions

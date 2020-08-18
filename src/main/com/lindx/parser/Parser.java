@@ -1,5 +1,6 @@
 package main.com.lindx.parser;
 
+import java.net.IDN;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -49,33 +50,55 @@ public class Parser {
 
         Result current = modDiv(exp);
 
+        //System.out.println(current.accomulator);
+       // System.out.println(current.remainder_expression);
+
         return null;
     }
 
-    private Result modDiv(final String exp) {
+    private Result modDiv(final String exp) throws IllegalArgumentException {
         
         Result current = subNum(exp);
-         
-        System.out.println("----");
-        System.out.println(current.accomulator);
-        System.out.println(current.remainder_expression);
-        
 
-        return null;
+        char sign = current.remainder_expression.charAt(0);
+
+        Result next = subNum(current.remainder_expression.substring(1));
+
+        System.out.println("1: " + current.accomulator);
+        System.out.println("2: " + sign);
+        System.out.println("4: " + next.accomulator);
+
+
+        // if(Types.signs.contains(sign)){
+
+        //     if(sign == '*')
+        //         current.accomulator *= Integer.parseInt(next);
+        //     if(sign == '/')
+        //         current.accomulator /= Integer.parseInt(next);
+
+        // }else{
+        //     throw new IllegalArgumentException();
+        // }
+
+        return null; //new Result(current.accomulator, null);
     }
 
     private Result subNum(final String exp) {
 
         int idx = 0;
 
-        while (!(Types.signs.contains(exp.charAt(++idx))));
-
+        while (++idx < exp.length() && !(Types.signs.contains(exp.charAt(idx))));
+         
         String arg = exp.substring(0, idx);
         String rem = exp.substring(idx, exp.length());
-        
-        if(Types.romans.contains(Roman.valueOf(arg)))
+
+        try {
+            if(Types.romans.contains(Roman.valueOf(arg)))
             roman_flag = true;
-        
+        } catch (IllegalArgumentException e) {
+            roman_flag = false;
+        }
+    
         if(roman_flag)
             return new Result(romans_map.get(Roman.valueOf(arg)), rem);
        

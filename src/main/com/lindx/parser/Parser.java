@@ -50,10 +50,18 @@ public class Parser {
 
         Result current = modDiv(exp);
 
-        //System.out.println(current.accomulator);
-       // System.out.println(current.remainder_expression);
+        if(current.remainder_expression != null) {
 
-        return null;
+            
+
+
+        }
+         
+        System.out.println("--");
+        System.out.println(current.accomulator);
+        System.out.println(current.remainder_expression);
+
+        return current;
     }
 
     private Result modDiv(final String exp) throws IllegalArgumentException {
@@ -64,23 +72,11 @@ public class Parser {
 
         Result next = subNum(current.remainder_expression.substring(1));
 
-        System.out.println("1: " + current.accomulator);
-        System.out.println("2: " + sign);
-        System.out.println("4: " + next.accomulator);
+        if(sign == '*' || sign == '/')       
+            return new Result(
+                (sign == '*') ? (current.accomulator *= next.accomulator):(current.accomulator /= next.accomulator), null);
 
-
-        // if(Types.signs.contains(sign)){
-
-        //     if(sign == '*')
-        //         current.accomulator *= Integer.parseInt(next);
-        //     if(sign == '/')
-        //         current.accomulator /= Integer.parseInt(next);
-
-        // }else{
-        //     throw new IllegalArgumentException();
-        // }
-
-        return null; //new Result(current.accomulator, null);
+        return current;
     }
 
     private Result subNum(final String exp) {

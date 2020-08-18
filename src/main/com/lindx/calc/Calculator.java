@@ -1,10 +1,6 @@
 package main.com.lindx.calc;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.Scanner;
-
 import main.com.lindx.parser.Parser;
 
 public class Calculator {
@@ -12,13 +8,9 @@ public class Calculator {
     private Scanner in;
     private String expression;
     private Parser parser; 
-
-    Collection<Character> signs;
-    Collection<Roman> romans;
    
     public Calculator(){
-        signs = new ArrayList<>(Arrays.asList('+', '-','/','*'));
-        romans = new ArrayList<>(Arrays.asList(Roman.values()));
+
         parser = new Parser();
 
         System.out.println("Input:\n" );
@@ -58,7 +50,7 @@ public class Calculator {
         StringBuilder left = new StringBuilder();
         StringBuilder right = new StringBuilder();
 
-        while (!signs.contains(exp.charAt(idx)))     
+        while (!Types.signs.contains(exp.charAt(idx)))     
             left.append(exp.charAt(idx++)).trimToSize();
         idx++;   
         while(idx < exp.length())
@@ -71,7 +63,7 @@ public class Calculator {
             if( (Integer.parseInt(a) > 0 && Integer.parseInt(a) <= 10) && (Integer.parseInt(b) > 0 && Integer.parseInt(b) <= 10))
                 return true;
         }
-        if(romans.contains(Roman.valueOf(a)) && romans.contains(Roman.valueOf(b)))
+        if(Types.romans.contains(Roman.valueOf(a)) && Types.romans.contains(Roman.valueOf(b)))
             return true;       
         return false;
     }

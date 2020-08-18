@@ -1,6 +1,5 @@
 package test.com.lindx;
 
-
 import main.com.lindx.calc.Calculator;
 
 public class TestMain {

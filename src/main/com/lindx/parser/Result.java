@@ -1,6 +1,7 @@
 package main.com.lindx.parser;
 
 public class Result<T> {
+    
     T accomulator;
     String remainder_expression;
 

@@ -1,20 +1,36 @@
 package main.com.lindx.parser;
 
-import main.com.lindx.calc.Roman;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 
 public class Parser {
 
-    Roman[] romans;
-
-    public Parser() {
-        romans = Roman.values();
-    }
+    String expression;
 
     public void parse(final String exp) {
         
-       
+        this.expression = cleanSpaces(exp);
+
+        
 
 
+
+        
+
+    }
+
+    private String cleanSpaces(final String exp){
+
+        String[] tmp = exp.split(" ");  
+
+        StringBuilder str = new StringBuilder();     
+
+        if(tmp.length > 1)
+            for (int i = 0; i < tmp.length; i++) 
+                str.append(tmp[i]);               
+
+        return new String( str.toString());
     }
 }
     

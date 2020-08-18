@@ -21,16 +21,15 @@ public class Parser {
         for (int i = 0; i < Types.romans.size() ; i++)
             romans_map.put(Roman.values()[i], i+1);
         
-
-        System.out.println(romans_map);
-
         this.expression = cleanSpaces(exp);
 
         Result result = plusMinus(this.expression);
 
         
-        
 
+
+        System.out.println(result.accomulator);
+        System.out.println(result.remainder_expression);
     }
 
     private String cleanSpaces(final String exp){
@@ -52,15 +51,13 @@ public class Parser {
 
         if(current.remainder_expression != null) {
 
-            
+            char sign = current.remainder_expression.charAt(0);
 
+            Result next = subNum(current.remainder_expression.substring(1));
 
+            return new Result(
+                (sign == '+') ? (current.accomulator += next.accomulator) : (current.accomulator -= next.accomulator), null);
         }
-         
-        System.out.println("--");
-        System.out.println(current.accomulator);
-        System.out.println(current.remainder_expression);
-
         return current;
     }
 
@@ -74,7 +71,7 @@ public class Parser {
 
         if(sign == '*' || sign == '/')       
             return new Result(
-                (sign == '*') ? (current.accomulator *= next.accomulator):(current.accomulator /= next.accomulator), null);
+                (sign == '*') ? (current.accomulator *= next.accomulator) : (current.accomulator /= next.accomulator), null);
 
         return current;
     }

@@ -10,10 +10,7 @@ public class Calculator {
     private Parser parser; 
    
     public Calculator(){
-
         parser = new Parser();
-
-        System.out.println("Input:\n" );
     };
 
     public void getExpression() {

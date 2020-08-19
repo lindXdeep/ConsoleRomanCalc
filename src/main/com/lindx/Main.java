@@ -8,6 +8,8 @@ public class Main {
 
         Calculator calculator = new Calculator();
 
+        System.out.println("Input:\n" );
+        
         calculator.getExpression();
 
         System.out.println("\nOutput: \n");

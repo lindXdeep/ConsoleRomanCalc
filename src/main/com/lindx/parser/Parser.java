@@ -25,13 +25,16 @@ public class Parser {
 
     private String cleanSpaces(final String exp){
 
-        String[] tmp = exp.split(" ");  
+        if (!exp.contains(" ")) 
+            return exp;    
+
+        String[] tmp = exp.split(" ");
 
         StringBuilder str = new StringBuilder();     
 
         if(tmp.length > 1)
             for (int i = 0; i < tmp.length; i++) 
-                str.append(tmp[i]);               
+                str.append(tmp[i]);            
 
         return new String( str.toString());
     }
@@ -72,7 +75,7 @@ public class Parser {
         int idx = 0;
 
         while (++idx < exp.length() && !(Constraints.signs.contains(exp.charAt(idx))));
-         
+
         String arg = exp.substring(0, idx);
         String rem = exp.substring(idx, exp.length());
 

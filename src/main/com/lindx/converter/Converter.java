@@ -23,16 +23,6 @@ public class Converter {
             roman_map.put(r.getVal(), r.toString());    
     }
 
-    public void show() {
-       
-        it = roman_map.entrySet().iterator();
-        
-        while (it.hasNext()) {
-            Map.Entry<Integer, String> m = it.next();
-            System.out.println(m.getKey() + " -> " + m.getValue());
-        }   
-    }
-
     public String toRoman(int val) {
 
         it = roman_map.entrySet().iterator();

@@ -1,35 +1,26 @@
 package main.com.lindx.parser;
 
-import java.net.IDN;
-import java.util.HashMap;
-import java.util.Map;
-
-import main.com.lindx.calc.Roman;
-import main.com.lindx.calc.Types;
+import main.com.lindx.calc.RomanConstraint;
+import main.com.lindx.converter.Converter;
+import main.com.lindx.calc.Constraints;
 
 public class Parser {
 
+    private String expression;
     private boolean roman_flag = false;
 
-    private String expression;
+    Converter converter = new Converter();
 
-    private Map<Roman, Integer> romans_map = new HashMap<>();  
-   
+    public String parse(final String exp) {
 
-    public void parse(final String exp) {
-
-        for (int i = 0; i < Types.romans.size() ; i++)
-            romans_map.put(Roman.values()[i], i+1);
-        
         this.expression = cleanSpaces(exp);
 
         Result result = plusMinus(this.expression);
 
+        if(roman_flag)
+            return converter.toRoman(result.accomulator);
         
-
-
-        System.out.println(result.accomulator);
-        System.out.println(result.remainder_expression);
+        return String.valueOf(result.accomulator);    
     }
 
     private String cleanSpaces(final String exp){
@@ -80,20 +71,20 @@ public class Parser {
 
         int idx = 0;
 
-        while (++idx < exp.length() && !(Types.signs.contains(exp.charAt(idx))));
+        while (++idx < exp.length() && !(Constraints.signs.contains(exp.charAt(idx))));
          
         String arg = exp.substring(0, idx);
         String rem = exp.substring(idx, exp.length());
 
         try {
-            if(Types.romans.contains(Roman.valueOf(arg)))
+            if(Constraints.romans.contains(RomanConstraint.valueOf(arg)))
             roman_flag = true;
         } catch (IllegalArgumentException e) {
             roman_flag = false;
         }
-    
+
         if(roman_flag)
-            return new Result(romans_map.get(Roman.valueOf(arg)), rem);
+            return new Result(converter.toArabic(arg), rem);
        
         return new Result(Integer.parseInt(arg), rem);
     }

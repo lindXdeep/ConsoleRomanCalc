@@ -31,16 +31,11 @@ public class Calculator {
         
         in.close();
 
-        parser.parse(this.expression.trim());
+        expression = parser.parse(this.expression.trim());
     }
 
     public String getResult() {
         return expression;
-    }
-
-    public void showResult() {
-        System.out.println("\nOutput: \n");
-        System.out.println(expression);
     }
 
     private boolean checkFormatExpression(final String exp) {
@@ -50,7 +45,7 @@ public class Calculator {
         StringBuilder left = new StringBuilder();
         StringBuilder right = new StringBuilder();
 
-        while (!Types.signs.contains(exp.charAt(idx)))     
+        while (!Constraints.signs.contains(exp.charAt(idx)))     
             left.append(exp.charAt(idx++)).trimToSize();
         idx++;   
         while(idx < exp.length())
@@ -63,7 +58,7 @@ public class Calculator {
             if( (Integer.parseInt(a) > 0 && Integer.parseInt(a) <= 10) && (Integer.parseInt(b) > 0 && Integer.parseInt(b) <= 10))
                 return true;
         }
-        if(Types.romans.contains(Roman.valueOf(a)) && Types.romans.contains(Roman.valueOf(b)))
+        if(Constraints.romans.contains(RomanConstraint.valueOf(a)) && Constraints.romans.contains(RomanConstraint.valueOf(b)))
             return true;       
         return false;
     }

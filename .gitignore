@@ -1,2 +1,6 @@
-out/**/*.class
-/out/
+.vscode
+target
+mvnw.cmd
+.dccache
+builds
+out

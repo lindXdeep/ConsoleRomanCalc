@@ -15,5 +15,5 @@ build:
 run:
 	java -jar ./target/JmCalcTask.jar
 	
-build-run: clean build run
+build-run: build run
 

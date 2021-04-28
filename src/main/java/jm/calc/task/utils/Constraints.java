@@ -7,13 +7,13 @@ import java.util.Collection;
 /**
  * Constraints
  */
+
 public class Constraints {
-
-  public static Collection<Character> signs =
-
-                            new ArrayList<>(Arrays.asList('+', '-','/','*'));
-
-  public static Collection<RomanConstraint> romans =
+  public static Collection<Character> signs = 
   
-                            new ArrayList<>(Arrays.asList(RomanConstraint.values()));
+                      new ArrayList<>(Arrays.asList('+', '-', '/', '*'));
+
+  public static Collection<RomanConstraint> romans = 
+                              
+                      new ArrayList<>(Arrays.asList(RomanConstraint.values()));
 }

@@ -2,6 +2,7 @@ package jm.calc.task.calc;
 
 import java.util.Scanner;
 
+import jm.calc.task.parser.Parser;
 import jm.calc.task.utils.Constraints;
 import jm.calc.task.utils.RomanConstraint;
 
@@ -9,10 +10,11 @@ public class Calculator {
 
   private Scanner in;
   private String expression;
+  private Parser parser;
 
   public Calculator() {
-
-  }
+    parser = new Parser();
+  };
 
   public void getExpression() {
 
@@ -29,7 +31,11 @@ public class Calculator {
 
     in.close();
 
-    System.out.println("result: " +  expression);
+    expression = parser.parse(this.expression.trim());
+  }
+
+  public String getResult() {
+    return expression;
   }
 
   private boolean checkFormatExpression(final String exp) {
@@ -41,9 +47,7 @@ public class Calculator {
 
     while (!Constraints.signs.contains(exp.charAt(idx)))
       left.append(exp.charAt(idx++)).trimToSize();
-
     idx++;
-
     while (idx < exp.length())
       right.append(exp.charAt(idx++)).trimToSize();
 
@@ -51,12 +55,10 @@ public class Calculator {
     String b = right.toString().trim();
 
     if (Character.isDigit(a.charAt(0))) {
-
       if ((Integer.parseInt(a) > 0 && Integer.parseInt(a) <= 10)
           && (Integer.parseInt(b) > 0 && Integer.parseInt(b) <= 10))
         return true;
     }
-    
     if (Constraints.romans.contains(RomanConstraint.valueOf(a))
         && Constraints.romans.contains(RomanConstraint.valueOf(b)))
       return true;

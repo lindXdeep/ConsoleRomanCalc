@@ -13,6 +13,8 @@ public class App{
 
     calculator.getExpression();
 
-  
+    System.out.println("\nOutput: \n");
+
+    System.out.println(calculator.getResult());
   }
 }
